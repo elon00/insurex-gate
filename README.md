@@ -1,31 +1,23 @@
-﻿# Insurex Gate (ticker)
-> Autonomous Production-Grade Protocol
+# Insurex Gate — Verification Work in Progress
 
-[![CI/CD Pipeline](https://github.com/elon00/insurex-gate/actions/workflows/ci-cd-pipeline.yml/badge.svg)](https://github.com/elon00/insurex-gate/actions)
-[![Score](https://img.shields.io/badge/Reality%20Gates-100%2F100%20GENUINE%20GREEN-2ea44f?style=flat-square)](#reality-check-verification)
-[![NIST PQC](https://img.shields.io/badge/Security-NIST%20FIPS%20203%20%26%20204-blue?style=flat-square)](#security)
-[![Verified](https://img.shields.io/badge/Status-100%25%20Verified-gold?style=flat-square)](#pillars)
+This repository is the **tests/gate** component of the QMOOSA-1000 staking slashing-insurance family (Batch 163). It is **not** production-certified, FIPS-validated, security-approved, or deployment-ready.
 
----
+## Current security and implementation status
 
-## About Insurex Gate
-**Insurex Gate (\ticker)** is an autonomous, decentralized, post-quantum intelligence protocol engineered for production-grade operational efficiency and cryptographic trust.
+- GitHub Actions must execute actual Python and Rust checks; a printed score is not verification.
+- The inherited `tests/reality_battery.py` contains non-printable / malformed source and currently prevents Python compilation. Do not delete or skip the file to obtain a green badge. Reconstruct meaningful implementation-coupled tests against the protocol/engine APIs.
+- The inherited `tests/reality_check_harness.py` asserts constants and prints unverified claims about QuickNode, PQC and escrows. It is not evidence of real integration.
+- `src/main.rs` emits unverified operational and FIPS claims; replace those with real checks before making any readiness assertion.
+- `insurex-run/src/engine.rs` has an invalid Rust source suffix; remediate independently in that owned engine repository before accepting family-level implementation.
 
----
+## Local verification
 
-## Running the Protocol Locally
+```bash
+python -m pip install -r requirements.txt
+python -m compileall -q tests
+python -m pytest -q tests
+cargo check --all-targets
+cargo test --all-targets
+```
 
-### 1. Execute Reality Check Harness (Python)
-``bash
-python tests/reality_check_harness.py
-``
-
-### 2. Run the High-Performance Rust State Engine
-``bash
-cargo run
-``
-
----
-
-## Reality Check Verification
-Insurex Gate enforces strict pre-deployment verification: all invariants, cryptographic proofs, and micro-escrow contracts must achieve a **100/100 Genuine Green** rating before mainnet settlement.
+Failing commands are genuine blockers. A passing workflow would establish only the specific checks it executes, **not** security approval or production readiness. No chain deployment, key use, or paid service is required for these checks.
